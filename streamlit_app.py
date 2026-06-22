@@ -282,8 +282,8 @@ input_data = pd.DataFrame({
 "ERQ_9":[erq9],
 "ERQ_10":[erq10],
 
-"JK_Perempuan":[jk],
-"TEMPAT_TINGGAL_Sendiri":[tempat]
+"JK":[jk],
+"TEMPAT":[tempat]
 
 })
 
