@@ -52,7 +52,10 @@ input_data=pd.DataFrame({
 })
 
 if st.button("Prediksi"):
-pred=model.predict(input_data)
+
+    pred = model.predict(input_data)
+
+    st.write(pred)
 
 hasil=label_encoder.inverse_transform(pred)
 
