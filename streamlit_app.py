@@ -30,11 +30,10 @@ if jk=="Perempuan":
 else:
     jk=1
 
-tempat_mapping={
-"Kos":0,
-"Orangtua":1,
-"Asrama":2
-}
+tempat = st.selectbox(
+    "Tempat Tinggal",
+    ["Keluarga", "Sendiri"]
+)
 
 tempat=tempat_mapping[tempat]
 
