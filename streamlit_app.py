@@ -52,6 +52,7 @@ tempat_mapping = {
 tempat = st.selectbox(
     "Tempat Tinggal",
     ["Keluarga", "Sendiri"]
+)
 
 tempat_mapping={
 "Keluarga":0,
