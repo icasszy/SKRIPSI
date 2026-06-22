@@ -30,6 +30,10 @@ if jk=="Perempuan":
 else:
     jk=1
 
+tempat_mapping = {
+    "Keluarga": 0,
+    "Sendiri": 1
+}
 tempat = st.selectbox(
     "Tempat Tinggal",
     ["Keluarga", "Sendiri"]
