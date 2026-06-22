@@ -49,9 +49,6 @@ input_data=pd.DataFrame({
 "USIA":[usia],
 "SEMESTER":[semester],
 "TEMPAT_TINGGAL":[tempat],
-"TOT_CEMAS":[cemas],
-"TOT_RE":[re]
-
 })
 
 if st.button("Prediksi"):
