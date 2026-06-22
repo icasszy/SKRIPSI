@@ -1,4 +1,9 @@
 import streamlit as st
+import pandas as pd
+import joblib
+
+model = joblib.load("catboost_model.pkl")
+label_encoder = joblib.load("label_encoder.pkl")
 
 st.set_page_config(
     page_title="Prediksi Tingkat Depresi Mahasiswa",
@@ -56,8 +61,6 @@ if st.button("Prediksi"):
     pred = model.predict(input_data)
 
     st.write(pred)
-
-hasil=label_encoder.inverse_transform(pred)
 
 st.success(
 
