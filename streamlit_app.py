@@ -283,7 +283,7 @@ input_data = pd.DataFrame({
 "ERQ_10":[erq10],
 
 "JK":[jk],
-"TEMPAT":[tempat]
+"TEMPAT_TINGGAL":[tempat]
 
 })
 
