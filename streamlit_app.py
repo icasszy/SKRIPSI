@@ -6,12 +6,58 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("🧠 Prediksi Tingkat Depresi Mahasiswa")
+jk = st.selectbox(
+    "Jenis Kelamin",
+    ["Perempuan","Laki-laki"]
+)
 
-st.markdown("""
-Website ini merupakan implementasi penelitian:
+usia = st.number_input(
+    "Usia",
+    17,
+    30,
+    20
+)
 
-**Perbandingan Performa Algoritma XGBoost dan CatBoost dalam Klasifikasi Tingkat Depresi Mahasiswa**
+semester = st.number_input(
+    "Semester",
+    1,
+    14,
+    4
+)
 
-Model terbaik yang digunakan adalah **CatBoost** dengan proporsi data **80:20**.
-""")
+if jk=="Perempuan":
+    jk=0
+else:
+    jk=1
+
+tempat_mapping={
+"Kos":0,
+"Orangtua":1,
+"Asrama":2
+}
+
+tempat=tempat_mapping[tempat]
+
+import pandas as pd
+
+input_data=pd.DataFrame({
+
+"JK":[jk],
+"USIA":[usia],
+"SEMESTER":[semester],
+"TEMPAT_TINGGAL":[tempat],
+"TOT_CEMAS":[cemas],
+"TOT_RE":[re]
+
+})
+
+if st.button("Prediksi"):
+pred=model.predict(input_data)
+
+hasil=label_encoder.inverse_transform(pred)
+
+st.success(
+
+f"Hasil Prediksi : {hasil[0]}"
+
+)
