@@ -35,7 +35,7 @@ tempat = st.selectbox(
     ["Keluarga", "Sendiri"]
 )
 
-tempat=tempat_mapping[tempat]
+tempat = tempat_mapping[tempat]
 
 import pandas as pd
 
