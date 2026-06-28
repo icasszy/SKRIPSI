@@ -10,7 +10,7 @@ st.set_page_config(
     page_icon="🧠",
     layout="wide"
 )
-st.title("🧠 Prediksi Tingkat Depresi Mahasiswa")
+st.title("🧠 Klasifikasi Tingkat Depresi Mahasiswa")
 
 st.write(
 """
