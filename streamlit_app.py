@@ -289,8 +289,41 @@ input_data = pd.DataFrame({
 
 if st.button("Klasifikasi"):
 
+    # Prediksi kelas
     pred = model.predict(input_data)
-
     hasil = label_encoder.inverse_transform(pred.astype(int))
 
-    st.success(f"Hasil Klasifikasi : {hasil[0]}")
+    # Prediksi probabilitas
+    prob = model.predict_proba(input_data)[0]
+
+    # Nama kelas sesuai LabelEncoder
+    kelas = label_encoder.classes_
+
+    st.markdown("---")
+    st.header("📊 Hasil Klasifikasi")
+
+    st.write(
+        f"Berdasarkan hasil klasifikasi menggunakan algoritma **CatBoost**, "
+        f"tingkat depresi mahasiswa tergolong:"
+    )
+
+    # Warna kotak hasil
+    if hasil[0].lower() == "rendah":
+        st.success(f"### {hasil[0]}")
+    elif hasil[0].lower() == "sedang":
+        st.warning(f"### {hasil[0]}")
+    else:
+        st.error(f"### {hasil[0]}")
+
+    st.subheader("Probabilitas Klasifikasi")
+
+    # Menampilkan probabilitas setiap kelas
+    for nama, nilai in zip(kelas, prob):
+        st.write(f"**{nama}** : {nilai*100:.2f}%")
+        st.progress(float(nilai))
+
+    st.markdown("---")
+    st.caption(
+        "Catatan: Hasil ini merupakan klasifikasi otomatis berdasarkan model Machine Learning "
+        "CatBoost dan bukan merupakan diagnosis psikologis profesional."
+    )
