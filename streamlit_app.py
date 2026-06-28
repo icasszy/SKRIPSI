@@ -287,7 +287,7 @@ input_data = pd.DataFrame({
 
 })
 
-if st.button("Prediksi"):
+if st.button("Klasifikasi"):
 
     pred = model.predict(input_data)
 
