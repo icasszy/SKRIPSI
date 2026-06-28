@@ -6,7 +6,7 @@ model = joblib.load("catboost_model.pkl")
 label_encoder = joblib.load("label_encoder.pkl")
 
 st.set_page_config(
-    page_title="Prediksi Tingkat Depresi Mahasiswa",
+    page_title="Klasifikasi Tingkat Depresi Mahasiswa",
     page_icon="🧠",
     layout="wide"
 )
@@ -15,7 +15,7 @@ st.title("🧠 Klasifikasi Tingkat Depresi Mahasiswa")
 st.write(
 """
 Silakan isi seluruh pertanyaan berikut sesuai kondisi Anda.
-Data hanya digunakan untuk proses prediksi menggunakan model Machine Learning CatBoost.
+Data hanya digunakan untuk proses klasifikasi menggunakan model Machine Learning CatBoost.
 """
 )
 
@@ -293,4 +293,4 @@ if st.button("Prediksi"):
 
     hasil = label_encoder.inverse_transform(pred.astype(int))
 
-    st.success(f"Hasil Prediksi : {hasil[0]}")
+    st.success(f"Hasil Klasifikasi : {hasil[0]}")
