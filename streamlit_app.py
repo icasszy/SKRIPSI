@@ -7,10 +7,9 @@ label_encoder = joblib.load("label_encoder.pkl")
 
 st.set_page_config(
     page_title="Klasifikasi Tingkat Depresi Mahasiswa",
-    page_icon="🧠",
     layout="wide"
 )
-st.title("🧠 Klasifikasi Tingkat Depresi Mahasiswa")
+st.title("Klasifikasi Tingkat Depresi Mahasiswa")
 
 st.write(
 """
