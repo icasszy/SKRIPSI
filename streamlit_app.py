@@ -160,7 +160,7 @@ list(opsi_anxiety.keys())
 st.header("B. Kuesioner Emotion Regulation ")
 opsi_re = {
 "Sangat Tidak Setuju":1,
-"Beberapa Hari":2,
+"Tidak Setuju":2,
 "Agak Tidak Setuju":3,
 "Netral / Ragu-Ragu":4,
 "Agak Setuju":5,
