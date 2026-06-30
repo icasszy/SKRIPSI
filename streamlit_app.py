@@ -315,7 +315,7 @@ def tampil_hasil(hasil):
         """
     )
 
-if st.button("🔍 Klasifikasi"):
+if st.button("Klasifikasi"):
 
     pred = model.predict(input_data)
     hasil = label_encoder.inverse_transform(pred.astype(int))[0]
