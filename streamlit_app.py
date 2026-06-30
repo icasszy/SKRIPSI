@@ -370,7 +370,7 @@ input_data = pd.DataFrame({
 # =========================
 # BUTTON
 # =========================
-if st.button("🔍 KLASIFIKASI SEKARANG"):
+if st.button("KLASIFIKASI SEKARANG"):
     pred = model.predict(input_data)
     hasil = label_encoder.inverse_transform(pred.astype(int))[0]
 
