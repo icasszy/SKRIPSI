@@ -286,21 +286,14 @@ input_data = pd.DataFrame({
 
 })
 
-if st.button("🔍 Klasifikasi"):
-
-    # Prediksi
-    pred = model.predict(input_data)
-    hasil = label_encoder.inverse_transform(pred.astype(int))[0]
-
-    st.markdown("---")
-    st.header("📊 Hasil Klasifikasi")
+@st.dialog("📊 Hasil Klasifikasi")
+def tampil_hasil(hasil):
 
     st.write(
-        f"Berdasarkan hasil klasifikasi menggunakan algoritma **CatBoost**, "
-        f"tingkat depresi mahasiswa tergolong:"
+        "Berdasarkan hasil klasifikasi menggunakan algoritma **CatBoost**, "
+        "tingkat depresi mahasiswa tergolong:"
     )
 
-    # Tampilan hasil
     if hasil == "Depresi Ringan":
         st.error(f"## {hasil}")
 
@@ -313,16 +306,18 @@ if st.button("🔍 Klasifikasi"):
     else:
         st.success(f"## {hasil}")
 
-    st.markdown("---")
-
     st.info(
         """
         **Catatan**
 
-        Hasil klasifikasi ini merupakan hasil prediksi menggunakan model Machine Learning
-        **CatBoost** berdasarkan jawaban kuesioner yang telah diisi.
-
-        Hasil ini **bukan merupakan diagnosis psikologis profesional**, melainkan
-        hanya sebagai alat bantu skrining awal.
+        Hasil ini merupakan hasil klasifikasi otomatis menggunakan model
+        Machine Learning CatBoost dan **bukan diagnosis psikologis profesional**.
         """
     )
+
+if st.button("🔍 Klasifikasi"):
+
+    pred = model.predict(input_data)
+    hasil = label_encoder.inverse_transform(pred.astype(int))[0]
+
+    tampil_hasil(hasil)
