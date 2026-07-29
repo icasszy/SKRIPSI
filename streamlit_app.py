@@ -372,21 +372,14 @@ input_data = pd.DataFrame({
 # =========================
 # BUTTON
 # =========================
+
 if st.button("KLASIFIKASI"):
 
-    # Prediksi kelas
+    # Prediksi
     pred = model.predict(input_data)
+    hasil = label_encoder.inverse_transform(pred)[0]
 
-    # Jika model menghasilkan angka
-    if isinstance(pred[0], (int, float)):
-        hasil = label_encoder.inverse_transform(pred.astype(int))[0]
-    else:
-        hasil = pred[0]
-
-    # Probabilitas
-    proba = model.predict_proba(input_data)[0]
-
-    # Badge warna
+    # Warna badge
     if hasil == "Normal":
         badge_class = "badge-success"
 
@@ -399,13 +392,25 @@ if st.button("KLASIFIKASI"):
     else:
         badge_class = "badge-danger"
 
-   st.markdown(f""" 
-    <div class="result-box"> 
-    <div class="result-label">
-    Hasil Klasifikasi Tingkat Depresi</div>
-    <div class="{badge_class}">
-    {hasil}</div> 
-    <div class="result-desc"> 
-    Hasil ini merupakan keluaran otomatis dari model <b>CatBoost</b> dan <b>bukan diagnosis psikologis profesional</b>. Jika hasil menunjukkan kondisi yang mengkhawatirkan, pertimbangkan untuk berkonsultasi dengan psikolog atau tenaga profesional. </div> 
-    </div>""", 
-    unsafe_allow_html=True)
+    # Tampilkan hasil
+    st.markdown(
+        f"""
+        <div class="result-box">
+            <div class="result-label">
+                Hasil Klasifikasi Tingkat Depresi
+            </div>
+
+            <div class="{badge_class}">
+                {hasil}
+            </div>
+
+            <div class="result-desc">
+                Hasil ini merupakan keluaran otomatis dari model
+                <b>XGBoost</b> dan <b>bukan diagnosis psikologis profesional</b>.
+                Jika hasil menunjukkan kondisi yang mengkhawatirkan,
+                disarankan berkonsultasi dengan psikolog atau tenaga profesional.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
