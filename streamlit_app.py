@@ -404,8 +404,7 @@ if st.button("KLASIFIKASI"):
         badge_class = "badge-danger"
 
     # Tampilkan hasil
-    st.markdown(
-        f"""
+    st.markdown(f
         <div class="result-box">
             <div class="result-label">
                 Hasil Klasifikasi Tingkat Depresi
