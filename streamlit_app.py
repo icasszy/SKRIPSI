@@ -393,24 +393,21 @@ if st.button("KLASIFIKASI"):
         badge_class = "badge-danger"
 
     # Tampilkan hasil
-    st.markdown(
-        f"""
-        <div class="result-box">
-            <div class="result-label">
-                Hasil Klasifikasi Tingkat Depresi
-            </div>
-
-            <div class="{badge_class}">
-                {hasil}
-            </div>
-
-            <div class="result-desc">
-                Hasil ini merupakan keluaran otomatis dari model
-                <b>XGBoost</b> dan <b>bukan diagnosis psikologis profesional</b>.
-                Jika hasil menunjukkan kondisi yang mengkhawatirkan,
-                disarankan berkonsultasi dengan psikolog atau tenaga profesional.
-            </div>
+   st.markdown(
+    f"""
+    <div class="result-box">
+        <div class="result-label">
+            Hasil Klasifikasi Tingkat Depresi
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+
+        <div class="{badge_class}">
+            {hasil}
+        </div>
+
+        <div class="result-desc">
+            Hasil ini merupakan keluaran otomatis dari model <b>XGBoost</b>.
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
