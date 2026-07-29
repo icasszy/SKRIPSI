@@ -372,12 +372,23 @@ input_data = pd.DataFrame({
 # =========================
 # BUTTON
 # =========================
-
 if st.button("KLASIFIKASI"):
 
     # Prediksi
     pred = model.predict(input_data)
-    hasil = label_encoder.inverse_transform(pred)[0]
+
+    # Ubah ke integer
+    pred = int(pred[0])
+
+    # Mapping label
+    label_map = {
+        0: "Normal",
+        1: "Depresi Ringan",
+        2: "Depresi Sedang",
+        3: "Depresi Berat"
+    }
+
+    hasil = label_map[pred]
 
     # Warna badge
     if hasil == "Normal":
@@ -393,21 +404,24 @@ if st.button("KLASIFIKASI"):
         badge_class = "badge-danger"
 
     # Tampilkan hasil
-   st.markdown(
-    f"""
-    <div class="result-box">
-        <div class="result-label">
-            Hasil Klasifikasi Tingkat Depresi
-        </div>
+    st.markdown(
+        f"""
+        <div class="result-box">
+            <div class="result-label">
+                Hasil Klasifikasi Tingkat Depresi
+            </div>
 
-        <div class="{badge_class}">
-            {hasil}
-        </div>
+            <div class="{badge_class}">
+                {hasil}
+            </div>
 
-        <div class="result-desc">
-            Hasil ini merupakan keluaran otomatis dari model <b>XGBoost</b>.
+            <div class="result-desc">
+                Hasil ini merupakan keluaran otomatis dari model
+                <b>XGBoost</b> dan <b>bukan diagnosis psikologis profesional</b>.
+                Jika hasil menunjukkan kondisi yang mengkhawatirkan,
+                disarankan berkonsultasi dengan psikolog atau tenaga profesional.
+            </div>
         </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+        """,
+        unsafe_allow_html=True
+    )
