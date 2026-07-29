@@ -187,7 +187,7 @@ jk_mapping = {
     "Laki-laki": 1
 }
 
-tempat_mapping = {
+tempat_tinggal_mapping = {
     "Keluarga": 0,
     "Sendiri": 1
 }
