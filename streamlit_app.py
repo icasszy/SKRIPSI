@@ -174,7 +174,7 @@ st.markdown("""
     <div class="hero-title">Klasifikasi Tingkat Depresi Mahasiswa</div>
     <div class="hero-subtitle">
         Silakan isi seluruh pertanyaan berikut sesuai kondisi Anda.<br>
-        Data digunakan untuk proses klasifikasi menggunakan model Machine Learning <b>CatBoost</b>.
+        Data digunakan untuk proses klasifikasi menggunakan model Machine Learning <b>XGBoost</b>.
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -331,49 +331,61 @@ erq10 = opsi_re[erq10]
 # DATAFRAME
 # =========================
 input_data = pd.DataFrame({
-    "USIA": [usia],
-    "SEMESTER": [semester],
 
-    "PHQ_1": [phq1],
-    "PHQ_2": [phq2],
-    "PHQ_3": [phq3],
-    "PHQ_4": [phq4],
-    "PHQ_5": [phq5],
-    "PHQ_6": [phq6],
-    "PHQ_7": [phq7],
-    "PHQ_8": [phq8],
-    "PHQ_9": [phq9],
+    "USIA":[usia],
+    "JK":[jk],
+    "SEMESTER":[semester],
+    "TEMPAT_TINGGAL":[tempat],
 
-    "GAD_1": [gad1],
-    "GAD_2": [gad2],
-    "GAD_3": [gad3],
-    "GAD_4": [gad4],
-    "GAD_5": [gad5],
-    "GAD_6": [gad6],
-    "GAD_7": [gad7],
+    "PHQ_1":[phq1],
+    "PHQ_2":[phq2],
+    "PHQ_3":[phq3],
+    "PHQ_4":[phq4],
+    "PHQ_5":[phq5],
+    "PHQ_6":[phq6],
+    "PHQ_7":[phq7],
+    "PHQ_8":[phq8],
+    "PHQ_9":[phq9],
 
-    "ERQ_1": [erq1],
-    "ERQ_2": [erq2],
-    "ERQ_3": [erq3],
-    "ERQ_4": [erq4],
-    "ERQ_5": [erq5],
-    "ERQ_6": [erq6],
-    "ERQ_7": [erq7],
-    "ERQ_8": [erq8],
-    "ERQ_9": [erq9],
-    "ERQ_10": [erq10],
+    "GAD_1":[gad1],
+    "GAD_2":[gad2],
+    "GAD_3":[gad3],
+    "GAD_4":[gad4],
+    "GAD_5":[gad5],
+    "GAD_6":[gad6],
+    "GAD_7":[gad7],
 
-    "JK": [jk],
-    "TEMPAT_TINGGAL": [tempat]
+    "ERQ_1":[erq1],
+    "ERQ_2":[erq2],
+    "ERQ_3":[erq3],
+    "ERQ_4":[erq4],
+    "ERQ_5":[erq5],
+    "ERQ_6":[erq6],
+    "ERQ_7":[erq7],
+    "ERQ_8":[erq8],
+    "ERQ_9":[erq9],
+    "ERQ_10":[erq10]
+
 })
 
 # =========================
 # BUTTON
 # =========================
 if st.button("KLASIFIKASI"):
-    pred = model.predict(input_data)
-    hasil = label_encoder.inverse_transform(pred.astype(int))[0]
 
+    # Prediksi kelas
+    pred = model.predict(input_data)
+
+    # Jika model menghasilkan angka
+    if isinstance(pred[0], (int, float)):
+        hasil = label_encoder.inverse_transform(pred.astype(int))[0]
+    else:
+        hasil = pred[0]
+
+    # Probabilitas
+    proba = model.predict_proba(input_data)[0]
+
+    # Badge warna
     if hasil == "Normal":
         badge_class = "badge-success"
 
@@ -383,18 +395,37 @@ if st.button("KLASIFIKASI"):
     elif hasil == "Depresi Sedang":
         badge_class = "badge-warning"
 
-    elif hasil == "Depresi Berat":
+    else:
         badge_class = "badge-danger"
 
     st.markdown(f"""
     <div class="result-box">
-        <div class="result-label">Hasil Klasifikasi Tingkat Depresi</div>
-        <div class="{badge_class}">{hasil}</div>
-        <div class="result-desc">
-            Hasil ini merupakan keluaran otomatis dari model <b>CatBoost</b> dan
-            <b>bukan diagnosis psikologis profesional</b>. Jika hasil menunjukkan
-            kondisi yang mengkhawatirkan, pertimbangkan untuk berkonsultasi dengan
-            psikolog atau tenaga profesional.
+
+        <div class="result-label">
+        Hasil Klasifikasi Tingkat Depresi
         </div>
+
+        <div class="{badge_class}">
+            {hasil}
+        </div>
+
     </div>
     """, unsafe_allow_html=True)
+
+    st.write("### Tingkat Keyakinan Model")
+
+    kelas = label_encoder.classes_
+
+    hasil_prob = pd.DataFrame({
+        "Kelas": kelas,
+        "Probabilitas": proba
+    })
+
+    st.dataframe(hasil_prob)
+
+    st.progress(float(proba.max()))
+
+    st.info(
+        "Hasil ini merupakan prediksi model Machine Learning XGBoost "
+        "dan bukan merupakan diagnosis psikologis profesional."
+    )
