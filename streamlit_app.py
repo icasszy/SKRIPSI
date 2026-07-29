@@ -365,7 +365,7 @@ input_data = pd.DataFrame({
     "ERQ_10":[erq10],
 
     "JK":[jk],
-    "TEMPAT_TINGGAL":[tempat_tinggal],
+    "TEMPAT_TINGGAL":[tempat],
 
 })
 
