@@ -333,7 +333,7 @@ erq10 = opsi_re[erq10]
 input_data = pd.DataFrame({
 
     "USIA":[usia],
-    "JK":[jk],
+    "SEMESTER":[semester],
     
     "PHQ_1":[phq1],
     "PHQ_2":[phq2],
@@ -364,8 +364,8 @@ input_data = pd.DataFrame({
     "ERQ_9":[erq9],
     "ERQ_10":[erq10],
 
-    "SEMESTER":[semester],
-    "TEMPAT_TINGGAL":[tempat],
+    "JK":[jk],
+    "TEMPAT_TINGGAL":[tempat_tinggal],
 
 })
 
