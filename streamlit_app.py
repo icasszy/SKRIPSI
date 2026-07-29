@@ -14,7 +14,7 @@ st.set_page_config(
 # =========================
 # LOAD MODEL
 # =========================
-model = joblib.load("XGboost_model.pkl")
+model = joblib.load("xgboost_model.pkl")
 label_encoder = joblib.load("label_encoder.pkl")
 
 # =========================
