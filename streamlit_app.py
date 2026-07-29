@@ -334,9 +334,7 @@ input_data = pd.DataFrame({
 
     "USIA":[usia],
     "JK":[jk],
-    "SEMESTER":[semester],
-    "TEMPAT_TINGGAL":[tempat],
-
+    
     "PHQ_1":[phq1],
     "PHQ_2":[phq2],
     "PHQ_3":[phq3],
@@ -364,7 +362,10 @@ input_data = pd.DataFrame({
     "ERQ_7":[erq7],
     "ERQ_8":[erq8],
     "ERQ_9":[erq9],
-    "ERQ_10":[erq10]
+    "ERQ_10":[erq10],
+
+    "SEMESTER":[semester],
+    "TEMPAT_TINGGAL":[tempat],
 
 })
 
