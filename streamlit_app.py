@@ -14,7 +14,7 @@ st.set_page_config(
 # =========================
 # LOAD MODEL
 # =========================
-model = joblib.load("catboost_model.pkl")
+model = joblib.load("XGboost_model.pkl")
 label_encoder = joblib.load("label_encoder.pkl")
 
 # =========================
@@ -374,14 +374,17 @@ if st.button("KLASIFIKASI"):
     pred = model.predict(input_data)
     hasil = label_encoder.inverse_transform(pred.astype(int))[0]
 
-    if hasil == "Depresi Ringan":
-        badge_class = "badge-warning"
+    if hasil == "Normal":
+        badge_class = "badge-success"
+
+    elif hasil == "Depresi Ringan":
+        badge_class = "badge-info"
+
     elif hasil == "Depresi Sedang":
         badge_class = "badge-warning"
+
     elif hasil == "Depresi Berat":
         badge_class = "badge-danger"
-    else:
-        badge_class = "badge-success"
 
     st.markdown(f"""
     <div class="result-box">
