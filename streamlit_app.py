@@ -420,7 +420,6 @@ if st.button("KLASIFIKASI"):
                 Jika hasil menunjukkan kondisi yang mengkhawatirkan,
                 disarankan berkonsultasi dengan psikolog atau tenaga profesional.
             </div>
-        </div>
-        """,
+        </div>,
         unsafe_allow_html=True
     )
