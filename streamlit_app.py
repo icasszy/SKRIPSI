@@ -376,7 +376,6 @@ if st.button("KLASIFIKASI"):
 
     pred = model.predict(input_data)
 
-    # jika output model berupa angka
     hasil = int(pred[0])
 
     mapping = {
@@ -389,32 +388,31 @@ if st.button("KLASIFIKASI"):
     hasil = mapping[hasil]
 
     if hasil == "Normal":
-        badge_class = "badge-success"
+        badge = "badge-success"
     elif hasil == "Depresi Ringan":
-        badge_class = "badge-info"
+        badge = "badge-info"
     elif hasil == "Depresi Sedang":
-        badge_class = "badge-warning"
+        badge = "badge-warning"
     else:
-        badge_class = "badge-danger"
+        badge = "badge-danger"
 
-    st.markdown(
-        f"""
-<div class="result-box">
-    <div class="result-label">
-        HASIL KLASIFIKASI TINGKAT DEPRESI
-    </div>
+    html = f"""
+    <div class="result-box">
+        <div class="result-label">
+            HASIL KLASIFIKASI TINGKAT DEPRESI
+        </div>
 
-    <div class="{badge_class}">
-        {hasil}
-    </div>
+        <div class="{badge}">
+            {hasil}
+        </div>
 
-    <div class="result-desc">
-        Hasil ini merupakan keluaran otomatis dari model
-        <b>XGBoost</b> dan <b>bukan diagnosis psikologis profesional</b>.
-        Jika hasil menunjukkan kondisi yang mengkhawatirkan,
-        disarankan berkonsultasi dengan psikolog atau tenaga profesional.
+        <div class="result-desc">
+            Hasil ini merupakan keluaran otomatis dari model
+            <b>XGBoost</b> dan <b>bukan diagnosis psikologis profesional</b>.
+            Jika hasil menunjukkan kondisi yang mengkhawatirkan,
+            disarankan berkonsultasi dengan psikolog atau tenaga profesional.
+        </div>
     </div>
-</div>
-""",
-        unsafe_allow_html=True,
-    )
+    """
+
+    st.markdown(html, unsafe_allow_html=True)
