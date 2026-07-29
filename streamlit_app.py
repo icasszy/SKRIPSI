@@ -374,52 +374,47 @@ input_data = pd.DataFrame({
 # =========================
 if st.button("KLASIFIKASI"):
 
-    # Prediksi
     pred = model.predict(input_data)
 
-    # Ubah ke integer
-    pred = int(pred[0])
+    # jika output model berupa angka
+    hasil = int(pred[0])
 
-    # Mapping label
-    label_map = {
+    mapping = {
         0: "Normal",
         1: "Depresi Ringan",
         2: "Depresi Sedang",
         3: "Depresi Berat"
     }
 
-    hasil = label_map[pred]
+    hasil = mapping[hasil]
 
-    # Warna badge
     if hasil == "Normal":
         badge_class = "badge-success"
-
     elif hasil == "Depresi Ringan":
         badge_class = "badge-info"
-
     elif hasil == "Depresi Sedang":
         badge_class = "badge-warning"
-
     else:
         badge_class = "badge-danger"
 
-    # Tampilkan hasil
-    st.markdown(f
-        <div class="result-box">
-            <div class="result-label">
-                Hasil Klasifikasi Tingkat Depresi
-            </div>
+    st.markdown(
+        f"""
+<div class="result-box">
+    <div class="result-label">
+        HASIL KLASIFIKASI TINGKAT DEPRESI
+    </div>
 
-            <div class="{badge_class}">
-                {hasil}
-            </div>
+    <div class="{badge_class}">
+        {hasil}
+    </div>
 
-            <div class="result-desc">
-                Hasil ini merupakan keluaran otomatis dari model
-                <b>XGBoost</b> dan <b>bukan diagnosis psikologis profesional</b>.
-                Jika hasil menunjukkan kondisi yang mengkhawatirkan,
-                disarankan berkonsultasi dengan psikolog atau tenaga profesional.
-            </div>
-        </div>,
-        unsafe_allow_html=True
+    <div class="result-desc">
+        Hasil ini merupakan keluaran otomatis dari model
+        <b>XGBoost</b> dan <b>bukan diagnosis psikologis profesional</b>.
+        Jika hasil menunjukkan kondisi yang mengkhawatirkan,
+        disarankan berkonsultasi dengan psikolog atau tenaga profesional.
+    </div>
+</div>
+""",
+        unsafe_allow_html=True,
     )
