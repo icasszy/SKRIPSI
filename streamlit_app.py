@@ -399,34 +399,13 @@ if st.button("KLASIFIKASI"):
     else:
         badge_class = "badge-danger"
 
-    st.markdown(f"""
-    <div class="result-box">
-
-        <div class="result-label">
-        Hasil Klasifikasi Tingkat Depresi
-        </div>
-
-        <div class="{badge_class}">
-            {hasil}
-        </div>
-
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.write("### Tingkat Keyakinan Model")
-
-    kelas = label_encoder.classes_
-
-    hasil_prob = pd.DataFrame({
-        "Kelas": kelas,
-        "Probabilitas": proba
-    })
-
-    st.dataframe(hasil_prob)
-
-    st.progress(float(proba.max()))
-
-    st.info(
-        "Hasil ini merupakan prediksi model Machine Learning XGBoost "
-        "dan bukan merupakan diagnosis psikologis profesional."
-    )
+   st.markdown(f""" 
+    <div class="result-box"> 
+    <div class="result-label">
+    Hasil Klasifikasi Tingkat Depresi</div>
+    <div class="{badge_class}">
+    {hasil}</div> 
+    <div class="result-desc"> 
+    Hasil ini merupakan keluaran otomatis dari model <b>CatBoost</b> dan <b>bukan diagnosis psikologis profesional</b>. Jika hasil menunjukkan kondisi yang mengkhawatirkan, pertimbangkan untuk berkonsultasi dengan psikolog atau tenaga profesional. </div> 
+    </div>""", 
+    unsafe_allow_html=True)
